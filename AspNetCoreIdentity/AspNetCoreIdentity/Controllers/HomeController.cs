@@ -1,8 +1,8 @@
 ﻿using AspNetCoreIdentity.Extensions;
 using AspNetCoreIdentity.Models;
+using KissLog;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace AspNetCoreIdentity.Controllers
 {
@@ -10,9 +10,9 @@ namespace AspNetCoreIdentity.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IKLogger _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IKLogger logger)
         {
             _logger = logger;
         }
@@ -20,18 +20,31 @@ namespace AspNetCoreIdentity.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            _logger.Trace("Usuário acessou a home");
+
             return View();
         }
         
         public IActionResult Privacy()
         {
             throw new Exception("Erro");
+
             return View();
         }
 
         [Authorize(Roles = "Admin")]
         public IActionResult Secret()
-        { 
+        {
+            try
+            {
+                throw new Exception("Algo muito ruim aconteceu");
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e);
+                throw;
+            }
+
             return View();
         }
 

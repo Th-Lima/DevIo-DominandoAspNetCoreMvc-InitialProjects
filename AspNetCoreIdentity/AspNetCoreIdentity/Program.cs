@@ -1,4 +1,6 @@
 using AspNetCoreIdentity.Config;
+using KissLog.AspNetCore;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,10 @@ builder.Services.AddAuthorizationConfig();
 
 #region Dependency Injection Configs
 builder.Services.ResolveDependencies();
+#endregion
+
+#region KissLogger
+builder.Services.RegisterKissLogListeners();
 #endregion
 
 builder.Services.AddRazorPages();
@@ -55,8 +61,10 @@ if (!app.Environment.IsDevelopment())
     app.MapRazorPages();
 
     app.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    app.RegisterKissLogListeners(builder.Configuration);
 
     app.Run();
 
