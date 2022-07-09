@@ -1,4 +1,5 @@
 using AspNetCoreIdentity.Config;
+using AspNetCoreIdentity.Extensions;
 using KissLog.AspNetCore;
 using System.Configuration;
 
@@ -35,7 +36,10 @@ builder.Services.RegisterKissLogListeners();
 
 builder.Services.AddRazorPages();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options => 
+{
+    options.Filters.Add(typeof(AuditoriaFilter));
+});
 
 var app = builder.Build();
 
