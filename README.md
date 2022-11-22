@@ -1,5 +1,5 @@
 # DevIo-DominandoAspNetCoreMvc-InitialProjects
-### Este repositório conta com os projetos de demostração e iniciais realizados no curso **"Dominando o ASP.NET MVC Core"** da plataforma: 
+### Este repositório conta com os projetos iniciais realizados no curso **"Dominando o ASP.NET MVC Core"** da plataforma: 
 [Desenvolvedor.io](https://desenvolvedor.io)
 
 #### Contendo importantes assuntos de introdução para o desenvolvimento com ASP.NET CORE MVC, como:
